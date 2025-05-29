@@ -77,8 +77,8 @@ Execute a transaction via the PiDualTx smart contract.
 - Body:
   ```json
   {
-    "user": "0xUserAddress...",
-    "merchant": "0xMerchantAddress...",
+    "user": "GUser Address...",  // User address starting with 'G'
+    "merchant": "GMerchantAddress...",  // Merchant address starting with 'G'
     "amount": "1000000000000000000", // Amount in wei
     "paymentType": "internal", // or "external"
     "autoConvert": true
@@ -112,16 +112,16 @@ Retrieve transaction history for a specified user address.
   ```json
   [
     {
-      "user": "0xUserAddress...",
-      "merchant": "0xMerchantAddress...",
+      "user": "GUser Address...",  // User address starting with 'G'
+      "merchant": "GMerchantAddress...",  // Merchant address starting with 'G'
       "amount": 1000000000000000000,
       "paymentType": "internal",
       "autoConvert": true,
       "timestamp": 1680000123
     },
     {
-      "user": "0xUserAddress...",
-      "merchant": "0xAnotherMerchant...",
+      "user": "GUser Address...",  // User address starting with 'G'
+      "merchant": "GAnotherMerchant...",  // Merchant address starting with 'G'
       "amount": 500000000000000000,
       "paymentType": "external",
       "autoConvert": false,
@@ -142,4 +142,5 @@ Retrieve transaction history for a specified user address.
 ---
 
 *This document is subject to update as the PiDualTx platform evolves.*
-```
+
+This update clarifies that user and merchant addresses should start with "G" to align with the Stellar protocol.
