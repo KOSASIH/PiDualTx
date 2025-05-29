@@ -1,0 +1,70 @@
+PiDualTx/
+├── backend/
+│   ├── ai-service/                        # Layanan AI untuk prediksi harga Pi
+│   │   ├── src/
+│   │   │   ├── main.py                   # FastAPI untuk endpoint prediksi
+│   │   │   ├── model.py                  # Model LSTM untuk prediksi harga
+│   │   │   ├── data.py                   # Pengelolaan data harga
+│   │   ├── requirements.txt              # Dependensi Python (FastAPI, TensorFlow, Redis)
+│   │   ├── Dockerfile                    # Docker image untuk ai-service
+│   │   └── kubernetes/
+│   │       └── ai-service-deployment.yaml # Deployment Kubernetes
+│   ├── rate-service/                     # Layanan untuk mengambil nilai internal/eksternal
+│   │   ├── src/
+│   │   │   └── main/
+│   │   │       └── java/
+│   │   │           └── com/pidualtx/rate/
+│   │   │               ├── RateController.java # REST API untuk harga Pi
+│   │   │               ├── ExchangeClient.java # Integrasi bursa (OKX, Bitget, dll.)
+│   │   ├── pom.xml                       # Dependensi Maven (Spring Boot, Redis)
+│   │   ├── Dockerfile                    # Docker image untuk rate-service
+│   │   └── kubernetes/
+│   │       └── rate-service-deployment.yaml # Deployment Kubernetes
+│   ├── smartcontract-service/            # Layanan untuk interaksi dengan PiDualTx.sol
+│   │   ├── src/
+│   │   │   └── main/
+│   │   │       └── java/
+│   │   │           └── com/pidualtx/smartcontract/
+│   │   │               ├── TransactionController.java # API untuk transaksi/analitik
+│   │   │               ├── PiDualTxContract.java # Wrapper Web3j untuk kontrak
+│   │   ├── pom.xml                       # Dependensi Maven
+│   │   ├── Dockerfile                    # Docker image untuk smartcontract-service
+│   │   └── kubernetes/
+│   │       └── smartcontract-service-deployment.yaml # Deployment Kubernetes
+├── frontend/
+│   ├── src/
+│   │   ├── abis/
+│   │   │   └── PiDualTx.json             # ABI kontrak PiDualTx.sol
+│   │   ├── components/
+│   │   │   └── AutonomousDualTx.vue      # Komponen utama untuk transaksi otonom
+│   │   ├── i18n/
+│   │   │   ├── en.js                     # Terjemahan bahasa Inggris
+│   │   │   └── id.js                     # Terjemahan bahasa Indonesia
+│   │   ├── store/
+│   │   │   └── index.js                  # Vuex store untuk state management
+│   │   ├── App.vue                       # Komponen root Vue
+│   │   ├── main.js                       # Entry point frontend
+│   ├── public/
+│   │   └── index.html                    # Template HTML
+│   ├── .env                              # Variabel lingkungan (API, node URL, dll.)
+│   ├── package.json                      # Dependensi npm (Vue, uview-ui, Web3)
+│   ├── vue.config.js                     # Konfigurasi Vue CLI
+│   ├── Dockerfile                        # Docker image untuk frontend
+│   └── kubernetes/
+│       └── frontend-deployment.yaml      # Deployment Kubernetes
+├── contracts/
+│   └── PiDualTx.sol                      # Smart contract untuk transaksi otonom
+├── kubernetes/
+│   ├── redis-deployment.yaml             # Deployment Redis untuk caching
+│   ├── ingress.yaml                      # Ingress untuk routing API
+│   └── monitoring/                       # Prometheus/Grafana untuk monitoring
+│       ├── prometheus.yaml
+│       └── grafana.yaml
+├── docs/
+│   ├── architecture.md                   # Dokumentasi arsitektur sistem
+│   ├── api.md                            # Dokumentasi endpoint API
+│   ├── setup.md                          # Panduan instalasi
+│   └── contributing.md                   # Panduan kontribusi
+├── .gitignore                            # File yang diabaikan Git
+├── README.md                             # Deskripsi proyek dan petunjuk
+└── LICENSE                               # Lisensi (MIT)
