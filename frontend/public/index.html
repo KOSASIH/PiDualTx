@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PiDualTx - Autonomous Pi Transactions</title>
+  <meta name="description" content="PiDualTx - The most advanced dual value system for Pi Network autonomous transactions" />
+  <meta name="theme-color" content="#203a43" />
+  <link rel="icon" href="favicon.ico" />
+  <style>
+    /* Minimal reset and smooth font */
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    #app {
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+    /* Scrollbar styling for dark theme */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #42a5f5;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #203a43;
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
+
