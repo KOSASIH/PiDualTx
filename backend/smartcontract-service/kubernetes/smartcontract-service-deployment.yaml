@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smartcontract-service
+  labels:
+    app: smartcontract-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: smartcontract-service
+  template:
+    metadata:
+      labels:
+        app: smartcontract-service
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+    spec:
+      containers:
+      - name: smartcontract-service-container
+        image: pidualtx/smartcontract-service:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            cpu: "500m"
+            memory: "512Mi"
+          limits:
+            cpu: "1"
+            memory: "1024Mi"
+        readinessProbe:
+          httpGet:
+            path: /actuator/health/readiness
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /actuator/health/liveness
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 20
+      restartPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: smartcontract-service
+  labels:
+    app: smartcontract-service
+spec:
+  selector:
+    app: smartcontract-service
+  ports:
+  - name: http
+    protocol: TCP
+    port: 8080
+    targetPort: 8080
+  type: ClusterIP
