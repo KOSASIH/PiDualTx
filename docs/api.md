@@ -77,8 +77,8 @@ Execute a transaction via the PiDualTx smart contract.
 - Body:
   ```json
   {
-    "user": "GUser Address...",  // User address starting with 'G'
-    "merchant": "GMerchantAddress...",  // Merchant address starting with 'G'
+    "user": "User Address...",  // User address starting with 'G'
+    "merchant": "MerchantAddress...",  // Merchant address starting with 'G'
     "amount": "1000000000000000000", // Amount in wei
     "paymentType": "internal", // or "external"
     "autoConvert": true
@@ -112,16 +112,16 @@ Retrieve transaction history for a specified user address.
   ```json
   [
     {
-      "user": "GUser Address...",  // User address starting with 'G'
-      "merchant": "GMerchantAddress...",  // Merchant address starting with 'G'
+      "user": "User Address...",  // User address starting with 'G'
+      "merchant": "MerchantAddress...",  // Merchant address starting with 'G'
       "amount": 1000000000000000000,
       "paymentType": "internal",
       "autoConvert": true,
       "timestamp": 1680000123
     },
     {
-      "user": "GUser Address...",  // User address starting with 'G'
-      "merchant": "GAnotherMerchant...",  // Merchant address starting with 'G'
+      "user": "User Address...",  // User address starting with 'G'
+      "merchant": "AnotherMerchant...",  // Merchant address starting with 'G'
       "amount": 500000000000000000,
       "paymentType": "external",
       "autoConvert": false,
