@@ -1,3 +1,48 @@
 # PiDualTx
 
 PiDualTx is a cutting-edge DApp for Pi Network that implements a Dual Value System autonomously, enabling transactions with either internal value ($314,159/Pi, community consensus) or external value (~$0.8111/Pi, exchange price).
+
+# Overview
+
+PiDualTx is a cutting-edge decentralized application (DApp) designed for the Pi Network. It implements a Dual Value System that autonomously enables transactions using either an internal value of $314,159/Pi (based on community consensus) or an external value of approximately $0.8111/Pi (based on exchange prices). This flexibility enhances the utility of Pi for users and merchants alike.
+
+## Features
+
+- **Dual Value System**: Users can transact using either the community-agreed internal value or the market-driven external value.
+- **AI-Powered Predictions**: Leverages machine learning models to predict future Pi prices, helping users make informed decisions.
+- **Real-Time Rate Updates**: Integrates with external exchanges to provide up-to-date pricing information.
+- **Secure Transactions**: Utilizes smart contracts to ensure secure and transparent transactions on the blockchain.
+- **User-Friendly Interface**: Built with a modern frontend framework for an intuitive user experience.
+
+## Architecture
+
+The PiDualTx application consists of several key components:
+
+- **Backend Services**: Implemented using FastAPI and Spring Boot, providing APIs for price predictions, rate retrieval, and transaction execution.
+- **Frontend Application**: A Vue.js-based single-page application (SPA) that interacts with the backend services and provides a seamless user experience.
+- **Smart Contracts**: Deployed on the blockchain to handle transactions securely and transparently.
+- **Monitoring Tools**: Integrated with Prometheus and Grafana for real-time monitoring and alerting.
+
+## Getting Started
+
+To get started with PiDualTx, follow the [Setup Guide](docs/setup.md) for instructions on how to set up the development environment and deploy the application.
+
+## API Documentation
+
+For detailed information on the available API endpoints, refer to the [API Documentation](docs/api.md).
+
+## Contributing
+
+We welcome contributions from the community! Please read our [Contributing Guide](docs/contributing.md) for information on how to get involved.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
+## Contact
+
+For questions or feedback, please reach out to the maintainers via the project's GitHub page.
+
+---
+
+*Join us in revolutionizing the way transactions are conducted on the Pi Network with PiDualTx!*
