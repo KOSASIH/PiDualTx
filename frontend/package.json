@@ -1,0 +1,45 @@
+{
+  "name": "pidualtx-frontend",
+  "version": "1.0.0",
+  "description": "PiDualTx Frontend - Advanced dual value system DApp for Pi Network",
+  "author": "KOSASIH",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve --port 8080",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "test:unit": "vue-cli-service test:unit"
+  },
+  "dependencies": {
+    "core-js": "^3.31.1",
+    "vue": "^3.3.4",
+    "vue-i18n": "^9.2.2",
+    "vue-router": "^4.1.6",
+    "vuex": "^4.1.0",
+    "web3": "^1.10.0",
+    "uview-ui": "^2.4.5",
+    "chart.js": "^4.3.0",
+    "axios": "^1.4.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^5.0.8",
+    "@vue/cli-plugin-eslint": "^5.0.8",
+    "@vue/cli-plugin-router": "^5.0.8",
+    "@vue/cli-plugin-unit-jest": "^5.0.8",
+    "@vue/cli-plugin-vuex": "^5.0.8",
+    "@vue/cli-service": "^5.0.8",
+    "@vue/compiler-sfc": "^3.3.4",
+    "eslint": "^8.43.0",
+    "eslint-plugin-vue": "^9.9.1",
+    "babel-eslint": "^10.1.0"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
