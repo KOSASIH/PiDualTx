@@ -7,6 +7,7 @@
   <meta name="description" content="PiDualTx - The most advanced dual value system for Pi Network autonomous transactions" />
   <meta name="theme-color" content="#203a43" />
   <link rel="icon" href="favicon.ico" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM5z4z5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5" crossorigin="anonymous" />
   <style>
     /* Minimal reset and smooth font */
     html, body {
@@ -22,9 +23,37 @@
     #app {
       min-height: 100vh;
       display: flex;
-      align-items: flex-start;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
       padding: 40px 20px;
+    }
+    header {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin: 0;
+    }
+    p {
+      font-size: 1.2em;
+      margin: 10px 0;
+    }
+    /* Button styles */
+    .btn {
+      background-color: #42a5f5;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background-color 0.3s;
+    }
+    .btn:hover {
+      background-color: #1e88e5;
     }
     /* Scrollbar styling for dark theme */
     ::-webkit-scrollbar {
@@ -41,8 +70,37 @@
   </style>
 </head>
 <body>
-  <div id="app"></div>
-  <script type="module" src="/src/main.js"></script>
+  <div id="app">
+    <header>
+      <h1>Welcome to PiDualTx</h1>
+      <p>The most advanced dual value system for Pi Network autonomous transactions</p>
+      <button class="btn" id="getStartedBtn">Get Started</button>
+    </header>
+    <main>
+      <section id="features">
+        <h2>Features</h2>
+        <ul>
+          <li>Dual Value System: Internal and external transaction options</li>
+          <li>AI-Powered Price Predictions</li>
+          <li>Real-Time Rate Updates from Exchanges</li>
+          <li>Secure Blockchain Transactions</li>
+          <li>User-Friendly Interface</li>
+        </ul>
+      </section>
+    </main>
+  </div>
+  <script type="module">
+    // Importing necessary modules
+    import { initializeApp } from './src/main.js';
+
+    // Initialize the application
+    initializeApp();
+
+    // Event listener for the Get Started button
+    document.getElementById('getStartedBtn').addEventListener('click', () => {
+      alert('Getting started with PiDualTx!');
+      // Here you can add functionality to navigate to the next step or section
+    });
+  </script>
 </body>
 </html>
-
