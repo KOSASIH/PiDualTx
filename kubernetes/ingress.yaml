@@ -1,0 +1,48 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pidualtx-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "10"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "30"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "30"
+spec:
+  rules:
+  - host: pidualtx.example.com
+    http:
+      paths:
+      - path: /api/rate-service
+        pathType: Prefix
+        backend:
+          service:
+            name: rate-service
+            port:
+              number: 8080
+      - path: /api/ai-service
+        pathType: Prefix
+        backend:
+          service:
+            name: ai-service
+            port:
+              number: 8000
+      - path: /api/smartcontract-service
+        pathType: Prefix
+        backend:
+          service:
+            name: smartcontract-service
+            port:
+              number: 8080
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: frontend
+            port:
+              number: 80
+
+  tls:
+  - hosts:
+    - pidualtx.example.com
+    secretName: pidualtx-tls-secret
