@@ -142,5 +142,3 @@ Retrieve transaction history for a specified user address.
 ---
 
 *This document is subject to update as the PiDualTx platform evolves.*
-
-This update clarifies that user and merchant addresses should start with "G" to align with the Stellar protocol.
