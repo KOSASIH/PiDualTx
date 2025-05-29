@@ -70,4 +70,3 @@ We welcome suggestions for new features! If you have an idea for a feature, plea
 We appreciate your contributions to the PiDualTx project! Together, we can make this application better for everyone. If you have any questions, feel free to reach out to the maintainers.
 
 *Happy coding!*
-```
