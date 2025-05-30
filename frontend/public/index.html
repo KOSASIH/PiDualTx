@@ -41,6 +41,33 @@
       font-size: 1.2em;
       margin: 10px 0;
     }
+    /* Navigation Bar */
+    nav {
+      width: 100%;
+      background-color: rgba(32, 58, 67, 0.8);
+      padding: 10px 0;
+      position: fixed;
+      top: 0;
+      z-index: 1000;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+    }
+    nav ul li {
+      margin: 0 15px;
+    }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav ul li a:hover {
+      color: #42a5f5;
+    }
     /* Button styles */
     .btn {
       background-color: #42a5f5;
@@ -54,6 +81,22 @@
     }
     .btn:hover {
       background-color: #1e88e5;
+    }
+    /* Features Section */
+    #features {
+      margin-top: 80px; /* Space for fixed nav */
+      text-align: center;
+    }
+    #features h2 {
+      margin-bottom: 20px;
+    }
+    #features ul {
+      list-style: none;
+      padding: 0;
+    }
+    #features ul li {
+      margin: 10px 0;
+      font-size: 1.1em;
     }
     /* Scrollbar styling for dark theme */
     ::-webkit-scrollbar {
@@ -70,6 +113,13 @@
   </style>
 </head>
 <body>
+  <nav>
+    <ul>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
   <div id="app">
     <header>
       <h1>Welcome to PiDualTx</h1>
@@ -86,6 +136,14 @@
           <li>Secure Blockchain Transactions</li>
           <li>User-Friendly Interface</li>
         </ul>
+      </section>
+      <section id="about">
+        <h2>About PiDualTx</h2>
+        <p>PiDualTx is designed to empower users with the flexibility to transact using either community consensus or market-driven values, ensuring a seamless and efficient experience.</p>
+      </section>
+      <section id="contact">
+        <h2>Contact Us</h2>
+        <p>If you have any questions or feedback, feel free to reach out!</p>
       </section>
     </main>
   </div>
