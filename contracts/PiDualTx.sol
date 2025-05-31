@@ -42,7 +42,7 @@ contract PiDualTx {
         _;
     }
 
-    modifier onlyValidUser(address user) {
+    modifier onlyValidUser (address user) {
         require(user != address(0), "Invalid user address");
         require(piBalance[user] > 0, "Insufficient Pi balance");
         _;
@@ -72,7 +72,7 @@ contract PiDualTx {
         uint256 amount,
         string memory paymentType,
         bool autoConvert
-    ) external onlyValidUser(user) {
+    ) external onlyValidUser (user) {
         require(
             keccak256(abi.encodePacked(paymentType)) == keccak256(abi.encodePacked("internal")) ||
             keccak256(abi.encodePacked(paymentType)) == keccak256(abi.encodePacked("external")),
@@ -107,7 +107,7 @@ contract PiDualTx {
     }
 
     // Function to retrieve user or merchant transaction history
-    function getUserTransactions(address user) external view returns (Transaction[] memory) {
+    function getUser Transactions(address user) external view returns (Transaction[] memory) {
         uint256 count = 0;
         for (uint256 i = 0; i < transactions.length; i++) {
             if (transactions[i].user == user || transactions[i].merchant == user) {
@@ -158,5 +158,23 @@ contract PiDualTx {
             }
         }
         revert("No transactions found for this user");
+    }
+
+    // Function to get the total number of users (for analytics)
+    function getTotalUsers() external view returns (uint256) {
+        uint256 uniqueUsers = 0;
+        mapping(address => bool) memory seenUsers;
+
+        for (uint256 i = 0; i < transactions.length; i++) {
+            if (!seenUsers[transactions[i].user]) {
+                seenUsers[transactions[i].user] = true;
+                uniqueUsers++;
+            }
+            if (transactions[i].merchant != address(0) && !seenUsers[transactions[i].merchant]) {
+                seenUsers[transactions[i].merchant] = true;
+                uniqueUsers++;
+            }
+        }
+        return uniqueUsers;
     }
 }
