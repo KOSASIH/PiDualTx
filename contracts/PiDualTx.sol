@@ -34,6 +34,7 @@ contract PiDualTx {
 
     event PiPurityValidated(address indexed user, bool isPure);
     event PiBalanceUpdated(address indexed user, uint256 balance);
+    event AdminTransferred(address indexed previousAdmin, address indexed newAdmin);
 
     // Modifier to restrict access
     modifier onlyAdmin() {
@@ -41,7 +42,7 @@ contract PiDualTx {
         _;
     }
 
-    modifier onlyValidUser (address user) {
+    modifier onlyValidUser(address user) {
         require(user != address(0), "Invalid user address");
         require(piBalance[user] > 0, "Insufficient Pi balance");
         _;
@@ -60,8 +61,8 @@ contract PiDualTx {
     // Function to update Pi balance (simulating mining/transfers)
     function updatePiBalance(address user, uint256 amount) external onlyAdmin {
         require(user != address(0), "Invalid user address");
-        piBalance[user] = amount;
-        emit PiBalanceUpdated(user, amount);
+        piBalance[user] += amount; // Allow incrementing balance
+        emit PiBalanceUpdated(user, piBalance[user]);
     }
 
     // Function to perform a transaction
@@ -71,7 +72,7 @@ contract PiDualTx {
         uint256 amount,
         string memory paymentType,
         bool autoConvert
-    ) external onlyValidUser (user) {
+    ) external onlyValidUser(user) {
         require(
             keccak256(abi.encodePacked(paymentType)) == keccak256(abi.encodePacked("internal")) ||
             keccak256(abi.encodePacked(paymentType)) == keccak256(abi.encodePacked("external")),
@@ -106,7 +107,7 @@ contract PiDualTx {
     }
 
     // Function to retrieve user or merchant transaction history
-    function getUser Transactions(address user) external view returns (Transaction[] memory) {
+    function getUserTransactions(address user) external view returns (Transaction[] memory) {
         uint256 count = 0;
         for (uint256 i = 0; i < transactions.length; i++) {
             if (transactions[i].user == user || transactions[i].merchant == user) {
@@ -133,11 +134,29 @@ contract PiDualTx {
     // Function for admin to transfer admin rights
     function transferAdmin(address newAdmin) external onlyAdmin {
         require(newAdmin != address(0), "Invalid new admin");
+        emit AdminTransferred(admin, newAdmin);
         admin = newAdmin;
     }
 
     // Function to get the balance of a user
     function getPiBalance(address user) external view returns (uint256) {
         return piBalance[user];
+    }
+
+    // Function to get the total balance of all users (for analytics)
+    function getTotalBalance() external view returns (uint256 total) {
+        for (uint256 i = 0; i < transactions.length; i++) {
+            total += transactions[i].amount;
+        }
+    }
+
+    // Function to get the last transaction of a user
+    function getLastTransaction(address user) external view returns (Transaction memory) {
+        for (uint256 i = transactions.length; i > 0; i--) {
+            if (transactions[i - 1].user == user || transactions[i - 1].merchant == user) {
+                return transactions[i - 1];
+            }
+        }
+        revert("No transactions found for this user");
     }
 }
