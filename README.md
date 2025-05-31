@@ -1,3 +1,4 @@
+[![CodeQL Advanced](https://github.com/KOSASIH/PiDualTx/actions/workflows/codeql.yml/badge.svg)](https://github.com/KOSASIH/PiDualTx/actions/workflows/codeql.yml)
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/KOSASIH/PiDualTx/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/KOSASIH/PiDualTx/tree/main)
 
 ![PiDualTx Icon](frontend/src/assets/PiDuAlTx_Icon.png)
