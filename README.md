@@ -5,6 +5,12 @@
 
 PiDualTx is a cutting-edge DApp for Pi Network that implements a Dual Value System autonomously, enabling transactions with either internal value ($314,159/Pi, community consensus) or external value (~$0.8111/Pi, exchange price).
 
+### Vision Statement
+"To empower a global community of users by providing a secure, flexible, and innovative platform for cryptocurrency transactions, fostering financial inclusion and driving the evolution of the digital economy."
+
+### Mission Statement
+"At PiDualTx, our mission is to revolutionize the way users transact within the Pi Network by offering a dual-value system that combines community-driven and market-based transactions. We are committed to ensuring the highest level of security, leveraging advanced AI for price predictions, and providing a user-friendly experience. Through continuous innovation and integration with various exchanges, we aim to enhance the value of Pi and contribute to the growth of the cryptocurrency ecosystem, while promoting transparency, trust, and active participation within our community." 
+
 # Overview
 
 PiDualTx is a cutting-edge decentralized application (DApp) designed for the Pi Network. It implements a Dual Value System that autonomously enables transactions using either an internal value of $314,159/Pi (based on community consensus) or an external value of approximately $0.8111/Pi (based on exchange prices). This flexibility enhances the utility of Pi for users and merchants alike.
