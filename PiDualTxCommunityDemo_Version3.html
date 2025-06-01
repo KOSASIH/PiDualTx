@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>PiDualTx Community Awareness Demo</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="واجهة متعددة اللغات توعوية تفاعلية لمجتمع PiDualTx. مساهمة Ze0ro99 بمعلومات موثوقة من KOSASIH.">
+  <style>
+    :root {
+      --primary: #42a5f5;
+      --primary-dark: #1e88e5;
+      --bg: #203a43;
+      --bg-gradient: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      --fg: #fff;
+      --success: #00e676;
+      --danger: #ff1744;
+      --info: #42a5f5;
+      --warn: #b15e00;
+    }
+    body {
+      font-family: 'Cairo', 'Segoe UI', sans-serif;
+      background: var(--bg-gradient);
+      color: var(--fg);
+      margin: 0;
+      min-height: 100vh;
+      direction: rtl;
+      transition: background 0.4s;
+    }
+    .disclaimer {
+      background: #fff2c2;
+      color: var(--warn);
+      border-radius: 10px;
+      border: 2px solid #ffe082;
+      margin: 18px auto 14px auto;
+      padding: 10px 20px;
+      font-size: 1em;
+      max-width: 900px;
+      text-align: right;
+      box-shadow: 0 2px 6px #ffecb3aa;
+      direction: rtl;
+      position: relative;
+      z-index: 2;
+    }
+    .lang-switch {
+      float: left;
+      direction: ltr;
+      margin-top: -8px;
+    }
+    .lang-switch button {
+      background: transparent;
+      border: none;
+      color: var(--primary);
+      font-weight: bold;
+      font-size: 1em;
+      margin: 0 0.25em;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .lang-switch button.active,
+    .lang-switch button:hover {
+      color: var(--primary-dark);
+      text-decoration: underline;
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      background: var(--bg);
+      padding: 12px 32px;
+      border-radius: 0 0 12px 12px;
+      margin-bottom: 18px;
+      align-items: center;
+    }
+    .navbar .logo {
+      font-weight: bold;
+      font-size: 1.5em;
+      color: var(--primary);
+    }
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 22px;
+      margin: 0; padding: 0;
+    }
+    .navbar li a {
+      color: var(--fg);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+      cursor: pointer;
+    }
+    .navbar li a:hover { color: var(--primary); }
+    .section {
+      margin: 24px auto;
+      max-width: 900px;
+      background: #203a43cc;
+      border-radius: 14px;
+      padding: 36px 22px 28px 22px;
+      box-shadow: 0 2px 8px #0f2027aa;
+      position: relative;
+    }
+    .main-btn, button[type="submit"] {
+      background: var(--primary);
+      color: var(--fg);
+      border: none;
+      border-radius: 6px;
+      padding: 12px 32px;
+      margin-top: 16px;
+      font-size: 1.12em;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    .main-btn:hover, button[type="submit"]:hover { background: var(--primary-dark);}
+    .form-row {
+      margin-bottom: 14px;
+      display: flex;
+      flex-direction: column;
+    }
+    .form-row label {
+      margin-bottom: 4px;
+      font-weight: 500;
+    }
+    .form-row input, .form-row select {
+      padding: 8px;
+      border-radius: 5px;
+      border: none;
+      font-size: 1em;
+      margin-bottom: 3px;
+    }
+    .tx-result.success { color: var(--success); margin-top: 12px; }
+    .tx-result.error { color: var(--danger); margin-top: 12px; }
+    .market-info { display: flex; gap: 32px; margin-bottom: 18px; flex-wrap: wrap; }
+    .market-info > div { background: #2c5364; padding: 10px 18px; border-radius: 8px; min-width: 160px; margin-bottom: 8px; font-size: 1.02em;}
+    .pure { color: var(--success); font-weight: bold; }
+    .impure { color: var(--danger); font-weight: bold; }
+    .chart-placeholder {
+      background: #222e3b;
+      border-radius: 14px;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--info);
+      font-size: 1.1em;
+      margin-bottom: 14px;
+    }
+    .history table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #223146;
+      margin-top: 18px;
+    }
+    .history th, .history td {
+      border: 1px solid #30415a;
+      padding: 7px 4px;
+      text-align: center;
+    }
+    .history th { background: #2c5364; }
+    .history td span.ناجحة, .history td span.success { color: var(--success); }
+    .history td span.فاشلة, .history td span.error { color: var(--danger); }
+    .wallet ul { list-style: disc inside; }
+    .support { text-align: center; }
+    @media (max-width: 700px) {
+      .navbar, .section { padding: 8px 4vw; }
+      .market-info { flex-direction: column; gap: 12px; }
+    }
+    .footer {
+      text-align: center;
+      color: #aaa;
+      margin: 40px auto 16px auto;
+      font-size: 0.98em;
+    }
+  </style>
+</head>
+<body>
+  <div class="disclaimer" id="disclaimer"></div>
+  <nav class="navbar">
+    <span class="logo">PiDualTx</span>
+    <ul id="navLinks"></ul>
+    <div class="lang-switch" id="langSwitch"></div>
+  </nav>
+  <main>
+    <section id="home" class="section home">
+      <h1 id="homeTitle"></h1>
+      <p id="homeDesc"></p>
+      <button onclick="scrollToSection('tx')" class="main-btn" id="startBtn"></button>
+    </section>
+    <section id="tx" class="section tx">
+      <h2 id="txTitle"></h2>
+      <form id="txForm" autocomplete="off">
+        <div class="form-row">
+          <label id="txTypeLabel"></label>
+          <select id="txType"></select>
+        </div>
+        <div class="form-row">
+          <label id="senderWalletLabel"></label>
+          <select id="senderWallet"></select>
+        </div>
+        <div class="form-row">
+          <label id="receiverLabel"></label>
+          <input id="receiver" placeholder="" required />
+        </div>
+        <div class="form-row">
+          <label id="amountLabel"></label>
+          <input type="number" id="amount" min="0.001" step="0.001" placeholder="" required />
+        </div>
+        <div class="form-row">
+          <label id="coinTypeLabel"></label>
+          <select id="coinType"></select>
+        </div>
+        <button type="submit" class="main-btn" id="txSubmitBtn"></button>
+      </form>
+      <div id="txResult"></div>
+    </section>
+    <section id="analytics" class="section analytics">
+      <h2 id="analyticsTitle"></h2>
+      <div class="market-info" id="marketInfo"></div>
+      <div class="chart-placeholder" id="chartPlaceholder"></div>
+    </section>
+    <section id="history" class="section history">
+      <h2 id="historyTitle"></h2>
+      <table id="txHistory">
+        <thead>
+          <tr id="historyHeaders"></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+    <section id="wallet" class="section wallet">
+      <h2 id="walletTitle"></h2>
+      <ul id="walletList"></ul>
+    </section>
+    <section id="support" class="section support">
+      <h2 id="supportTitle"></h2>
+      <p id="supportDesc"></p>
+      <button class="main-btn" id="supportBtn"></button>
+    </section>
+  </main>
+  <div class="footer" id="footer"></div>
+  <script>
+    // ====== Translation Data ======
+    const translations = {
+      ar: {
+        disclaimer: `<strong>تنويه هام:</strong>
+          <p>
+            هذا النموذج التفاعلي صُمم لغرض الشرح والتوعية فقط، وقد قام المطور <b>Ze0ro99</b> بإنشائه لتوجيه المجتمع بمصداقية، مستنداً إلى معلومات من السيد <b>KOSASIH</b> أحد المساهمين في تطوير مجتمع Pi Network.<br>
+            هذه الواجهة للعرض والشرح فقط وليست للاستخدام الفعلي، ولا يتحمل الفريق أو أي من المساهمين مسؤولية أي استخدام مسيء أو مخالف أو انتهاك للقوانين أو حقوق الملكية الفكرية أو سياسة Pi Network. أي استخدام خارج نطاق التوعية يقع على مسؤولية المستخدم وحده.
+          </p>`,
+        nav: [
+          { href: "#home", label: "الرئيسية" },
+          { href: "#tx", label: "معاملة جديدة" },
+          { href: "#analytics", label: "تحليلات السوق" },
+          { href: "#history", label: "السجل" },
+          { href: "#wallet", label: "المحفظة" },
+          { href: "#support", label: "الدعم" }
+        ],
+        lang: "العربية",
+        langCode: "ar",
+        langSwitch: "اللغة:",
+        langNames: { ar: "العربية", en: "English", fr: "Français" },
+        homeTitle: "مرحباً بك في منصة PiDualTx التوضيحية",
+        homeDesc: "هذا النموذج يشرح عملياً كيف يمكنك إجراء معاملات Pi بمرونة وقيمة مزدوجة، مع استعراض تحليلات السوق وربط محافظ Pi المختلفة.",
+        startBtn: "ابدأ التجربة التوضيحية",
+        txTitle: "معاملة Pi توضيحية",
+        txTypeLabel: "نوع المعاملة:",
+        txTypes: [
+          { value: "internal", label: "قيمة داخلية (مجتمع)" },
+          { value: "external", label: "قيمة خارجية (سوق)" },
+          { value: "auto", label: "تلقائي (ذكاء اصطناعي)" }
+        ],
+        senderWalletLabel: "محفظة المرسل:",
+        senderWallets: [
+          { value: "piwalletpro", label: "Pi Wallet Pro" },
+          { value: "shield", label: "Shield Wallet" },
+          { value: "quantum", label: "Quantum Pi" }
+        ],
+        receiverLabel: "محفظة المستلم:",
+        receiverPH: "أدخل عنوان محفظة Pi",
+        amountLabel: "المبلغ:",
+        amountPH: "أدخل المبلغ بالـ Pi",
+        coinTypeLabel: "نوع العملة:",
+        coinTypes: [
+          { value: "pi", label: "Pi" },
+          { value: "qpi", label: "Quantum Pi" },
+          { value: "stpi", label: "Pi Stable Coin" }
+        ],
+        txSubmitBtn: "تنفيذ تجريبي",
+        txSuccess: n => `تم تنفيذ العملية (توضيحيًا) بنجاح! رقم العملية: TX-${n}`,
+        txError: "فضلاً تأكد من جميع البيانات.",
+        analyticsTitle: "تحليلات السوق وتوقعات الذكاء الاصطناعي",
+        marketInfo: [
+          { id: "internalRate", label: "سعر Pi (داخلي):", unit: "Pi/USD" },
+          { id: "externalRate", label: "سعر Pi (خارجي):", unit: "Pi/USD" },
+          { id: "aiPrediction", label: "توقع الذكاء الاصطناعي:", unit: "Pi/USD" },
+          { id: "piPurity", label: "نقاء Pi:" }
+        ],
+        chartPlaceholder: "رسم بياني لحركة السعر (توضيحي)",
+        historyTitle: "سجل العمليات التوضيحي",
+        historyHeaders: [
+          "التاريخ", "المرسل", "المستلم", "المبلغ", "العملة", "نوع العملية", "الحالة"
+        ],
+        walletTitle: "إعدادات المحافظ (توضيحي)",
+        walletList: [
+          "ربط/فصل المحافظ (Pi Wallet Pro، Quantum Pi، Shield Wallet)",
+          "تغيير اللغة",
+          "تفعيل الحماية الذكية (Smart Shield)",
+          "تخصيص واجهة المستخدم"
+        ],
+        supportTitle: "الدعم الفني والتواصل",
+        supportDesc: "للاستفسارات والتوجيهات، يمكنكم التواصل مع فريق التطوير أو مراجعة مركز الأسئلة الشائعة.",
+        supportBtn: "تواصل مع الدعم",
+        footer: "جميع الحقوق محفوظة © لمجتمع PiDualTx | هذا النموذج للشرح فقط | مساهمة Ze0ro99 & KOSASIH"
+      },
+      en: {
+        disclaimer: `<strong>Important Notice:</strong>
+          <p>
+            This interactive demo is designed for educational and awareness purposes only. Developed by <b>Ze0ro99</b> using verified information from <b>KOSASIH</b>, a contributor to the Pi Network community.<br>
+            This interface is for demonstration/education only and not for actual use. Neither the team nor contributors are responsible for any misuse, violations, or breaches of intellectual property or Pi Network policy. Any use beyond educational awareness is at your own risk.
+          </p>`,
+        nav: [
+          { href: "#home", label: "Home" },
+          { href: "#tx", label: "New Transaction" },
+          { href: "#analytics", label: "Market Analytics" },
+          { href: "#history", label: "History" },
+          { href: "#wallet", label: "Wallet" },
+          { href: "#support", label: "Support" }
+        ],
+        lang: "English",
+        langCode: "en",
+        langSwitch: "Language:",
+        langNames: { ar: "العربية", en: "English", fr: "Français" },
+        homeTitle: "Welcome to the PiDualTx Awareness Demo",
+        homeDesc: "This demo interactively demonstrates how to operate Pi transactions with flexibility and dual value, including market analytics and wallet integration.",
+        startBtn: "Start The Demo",
+        txTitle: "Demo Pi Transaction",
+        txTypeLabel: "Transaction Type:",
+        txTypes: [
+          { value: "internal", label: "Internal Value (Community)" },
+          { value: "external", label: "External Value (Market)" },
+          { value: "auto", label: "Auto (AI Smart)" }
+        ],
+        senderWalletLabel: "Sender's Wallet:",
+        senderWallets: [
+          { value: "piwalletpro", label: "Pi Wallet Pro" },
+          { value: "shield", label: "Shield Wallet" },
+          { value: "quantum", label: "Quantum Pi" }
+        ],
+        receiverLabel: "Receiver's Wallet:",
+        receiverPH: "Enter Pi Wallet Address",
+        amountLabel: "Amount:",
+        amountPH: "Enter amount in Pi",
+        coinTypeLabel: "Currency Type:",
+        coinTypes: [
+          { value: "pi", label: "Pi" },
+          { value: "qpi", label: "Quantum Pi" },
+          { value: "stpi", label: "Pi Stable Coin" }
+        ],
+        txSubmitBtn: "Try Demo Transaction",
+        txSuccess: n => `Demo transaction completed successfully! TX: ${n}`,
+        txError: "Please make sure all fields are filled correctly.",
+        analyticsTitle: "Market Analytics and AI Prediction",
+        marketInfo: [
+          { id: "internalRate", label: "Pi (Internal Rate):", unit: "Pi/USD" },
+          { id: "externalRate", label: "Pi (External Rate):", unit: "Pi/USD" },
+          { id: "aiPrediction", label: "AI Prediction:", unit: "Pi/USD" },
+          { id: "piPurity", label: "Pi Purity:" }
+        ],
+        chartPlaceholder: "Price Chart (Demo Only)",
+        historyTitle: "Demo Transactions History",
+        historyHeaders: [
+          "Date", "Sender", "Receiver", "Amount", "Currency", "Type", "Status"
+        ],
+        walletTitle: "Wallet Settings (Demo)",
+        walletList: [
+          "Connect/Disconnect Pi Wallets (Pi Wallet Pro, Quantum Pi, Shield Wallet)",
+          "Switch Language",
+          "Enable Smart Shield",
+          "Customize UI"
+        ],
+        supportTitle: "Support & Contact",
+        supportDesc: "For inquiries and guidance, contact the dev team or see the FAQ center.",
+        supportBtn: "Contact Support",
+        footer: "All rights reserved © PiDualTx Community | For demo only | Contributed by Ze0ro99 & KOSASIH"
+      },
+      fr: {
+        disclaimer: `<strong>Avertissement important :</strong>
+          <p>
+            Cette démo interactive est destinée uniquement à l'éducation et à la sensibilisation. Créée par <b>Ze0ro99</b> avec des informations fiables de <b>KOSASIH</b>, contributeur à la communauté Pi Network.<br>
+            Cette interface n'est qu'une démo/explication et n'est pas destinée à un usage réel. L'équipe et les contributeurs déclinent toute responsabilité en cas de mauvaise utilisation ou violation des lois ou droits de propriété intellectuelle ou de la politique de Pi Network.
+          </p>`,
+        nav: [
+          { href: "#home", label: "Accueil" },
+          { href: "#tx", label: "Nouvelle transaction" },
+          { href: "#analytics", label: "Marché & IA" },
+          { href: "#history", label: "Historique" },
+          { href: "#wallet", label: "Portefeuille" },
+          { href: "#support", label: "Support" }
+        ],
+        lang: "Français",
+        langCode: "fr",
+        langSwitch: "Langue:",
+        langNames: { ar: "العربية", en: "English", fr: "Français" },
+        homeTitle: "Bienvenue sur la démo communautaire PiDualTx",
+        homeDesc: "Cette démo montre l'utilisation des transactions Pi à double valeur, avec analyses de marché et intégration de portefeuilles.",
+        startBtn: "Démarrer la démo",
+        txTitle: "Transaction Pi démo",
+        txTypeLabel: "Type de transaction :",
+        txTypes: [
+          { value: "internal", label: "Valeur interne (Communauté)" },
+          { value: "external", label: "Valeur externe (Marché)" },
+          { value: "auto", label: "Auto (IA intelligente)" }
+        ],
+        senderWalletLabel: "Portefeuille expéditeur :",
+        senderWallets: [
+          { value: "piwalletpro", label: "Pi Wallet Pro" },
+          { value: "shield", label: "Shield Wallet" },
+          { value: "quantum", label: "Quantum Pi" }
+        ],
+        receiverLabel: "Portefeuille destinataire :",
+        receiverPH: "Saisir l’adresse Pi Wallet",
+        amountLabel: "Montant :",
+        amountPH: "Saisir le montant en Pi",
+        coinTypeLabel: "Type de devise :",
+        coinTypes: [
+          { value: "pi", label: "Pi" },
+          { value: "qpi", label: "Quantum Pi" },
+          { value: "stpi", label: "Pi Stable Coin" }
+        ],
+        txSubmitBtn: "Transaction démo",
+        txSuccess: n => `Transaction démo réussie ! N° TX : ${n}`,
+        txError: "Veuillez vérifier tous les champs.",
+        analyticsTitle: "Marché & Prédiction IA",
+        marketInfo: [
+          { id: "internalRate", label: "Pi (interne):", unit: "Pi/USD" },
+          { id: "externalRate", label: "Pi (externe):", unit: "Pi/USD" },
+          { id: "aiPrediction", label: "Prédiction IA :", unit: "Pi/USD" },
+          { id: "piPurity", label: "Pureté Pi :" }
+        ],
+        chartPlaceholder: "Graphique des prix (démo)",
+        historyTitle: "Historique des transactions démo",
+        historyHeaders: [
+          "Date", "Expéditeur", "Destinataire", "Montant", "Devise", "Type", "Statut"
+        ],
+        walletTitle: "Paramètres du portefeuille (démo)",
+        walletList: [
+          "Connecter / Déconnecter les portefeuilles Pi (Pro, Quantum, Shield)",
+          "Changer la langue",
+          "Activer Smart Shield",
+          "Personnaliser l’interface"
+        ],
+        supportTitle: "Support & Contact",
+        supportDesc: "Pour toute question, contactez l’équipe ou consultez la FAQ.",
+        supportBtn: "Contacter le support",
+        footer: "Tous droits réservés © Communauté PiDualTx | Démo explicative | Ze0ro99 & KOSASIH"
+      }
+    };
+
+    // ====== State ======
+    let currentLang = localStorage.getItem('pi_demo_lang') || 'ar';
+    let marketData = {
+      internalRate: 0.82,
+      externalRate: 0.80,
+      aiPrediction: 0.83,
+      piPurity: true
+    };
+    let demoHistory = [
+      { date: "2025-06-01", sender: {ar:"أنت",en:"You",fr:"Vous"}, receiver: {ar:"متجر PiX",en:"PiX Store",fr:"Boutique PiX"}, amount: 150, coinType: "Pi", txType: {ar:"داخلي",en:"Internal",fr:"Interne"}, status: {ar:"ناجحة",en:"Success",fr:"Succès"} },
+      { date: "2025-05-30", sender: {ar:"أنت",en:"You",fr:"Vous"}, receiver: {ar:"صديقك",en:"Your friend",fr:"Votre ami"}, amount: 50, coinType: "QPi", txType: {ar:"خارجي",en:"External",fr:"Externe"}, status: {ar:"ناجحة",en:"Success",fr:"Succès"} }
+    ];
+
+    // ====== Helper Functions ======
+    function $(id) { return document.getElementById(id); }
+    function setLang(lang) {
+      if (!translations[lang]) lang = 'ar';
+      currentLang = lang;
+      localStorage.setItem('pi_demo_lang', lang);
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      renderAll();
+    }
+    function scrollToSection(id) {
+      var el = document.getElementById(id);
+      if (el) el.scrollIntoView({behavior:'smooth'});
+    }
+    function translate(obj) {
+      return typeof obj === "object" && obj !== null && obj[currentLang] ? obj[currentLang] : obj;
+    }
+
+    // ====== Rendering Functions ======
+    function renderLangSwitch() {
+      let out = `<span>${translations[currentLang].langSwitch}</span>`;
+      for (const code in translations[currentLang].langNames) {
+        out += `<button ${currentLang===code?'class="active"':''} onclick="setLang('${code}')">${translations[currentLang].langNames[code]}</button>`;
+      }
+      $("langSwitch").innerHTML = out;
+    }
+    function renderNav() {
+      const nav = translations[currentLang].nav.map(i=>`<li><a href="${i.href}" onclick="scrollToSection('${i.href.substring(1)}')">${i.label}</a></li>`).join("");
+      $("navLinks").innerHTML = nav;
+    }
+    function renderHome() {
+      $("homeTitle").textContent = translations[currentLang].homeTitle;
+      $("homeDesc").textContent = translations[currentLang].homeDesc;
+      $("startBtn").textContent = translations[currentLang].startBtn;
+    }
+    function renderTxForm() {
+      $("txTitle").textContent = translations[currentLang].txTitle;
+      $("txTypeLabel").textContent = translations[currentLang].txTypeLabel;
+      $("txType").innerHTML = translations[currentLang].txTypes.map(t=>`<option value="${t.value}">${t.label}</option>`).join("");
+      $("senderWalletLabel").textContent = translations[currentLang].senderWalletLabel;
+      $("senderWallet").innerHTML = translations[currentLang].senderWallets.map(w=>`<option value="${w.value}">${w.label}</option>`).join("");
+      $("receiverLabel").textContent = translations[currentLang].receiverLabel;
+      $("receiver").placeholder = translations[currentLang].receiverPH;
+      $("amountLabel").textContent = translations[currentLang].amountLabel;
+      $("amount").placeholder = translations[currentLang].amountPH;
+      $("coinTypeLabel").textContent = translations[currentLang].coinTypeLabel;
+      $("coinType").innerHTML = translations[currentLang].coinTypes.map(c=>`<option value="${c.value}">${c.label}</option>`).join("");
+      $("txSubmitBtn").textContent = translations[currentLang].txSubmitBtn;
+    }
+    function renderMarketInfo() {
+      $("analyticsTitle").textContent = translations[currentLang].analyticsTitle;
+      const mi = translations[currentLang].marketInfo;
+      $("marketInfo").innerHTML = `
+        <div><strong>${mi[0].label}</strong> <span id="internalRate">${marketData.internalRate}</span> <span>${mi[0].unit}</span></div>
+        <div><strong>${mi[1].label}</strong> <span id="externalRate">${marketData.externalRate}</span> <span>${mi[1].unit}</span></div>
+        <div><strong>${mi[2].label}</strong> <span id="aiPrediction">${marketData.aiPrediction}</span> <span>${mi[2].unit}</span></div>
+        <div><strong>${mi[3].label}</strong> <span id="piPurity" class="${marketData.piPurity?'pure':'impure'}">${marketData.piPurity ? (currentLang==='fr'?'Pur':currentLang==='en'?'Pure':'نقي') : (currentLang==='fr'?'Impur':currentLang==='en'?'Impure':'غير نقي')}</span></div>
+      `;
+      $("chartPlaceholder").textContent = translations[currentLang].chartPlaceholder;
+    }
+    function renderHistory() {
+      $("historyTitle").textContent = translations[currentLang].historyTitle;
+      $("historyHeaders").innerHTML = translations[currentLang].historyHeaders.map(h=>`<th>${h}</th>`).join("");
+      const tbody = $("txHistory").querySelector('tbody');
+      tbody.innerHTML = demoHistory.map(tx=>
+        `<tr>
+          <td>${tx.date}</td>
+          <td>${translate(tx.sender)}</td>
+          <td>${translate(tx.receiver)}</td>
+          <td>${tx.amount}</td>
+          <td>${tx.coinType}</td>
+          <td>${translate(tx.txType)}</td>
+          <td><span class="${translate(tx.status)}">${currentLang==='ar'? (translate(tx.status)==='ناجحة'?'✔️':'❌') : (translate(tx.status)==='Success'||translate(tx.status)==='Succès'?'✔️':'❌')}</span></td>
+        </tr>`
+      ).join("");
+    }
+    function renderWallet() {
+      $("walletTitle").textContent = translations[currentLang].walletTitle;
+      $("walletList").innerHTML = translations[currentLang].walletList.map(i=>`<li>${i}</li>`).join("");
+    }
+    function renderSupport() {
+      $("supportTitle").textContent = translations[currentLang].supportTitle;
+      $("supportDesc").textContent = translations[currentLang].supportDesc;
+      $("supportBtn").textContent = translations[currentLang].supportBtn;
+      $("supportBtn").onclick = ()=>alert(translations[currentLang].supportBtn+"!");
+    }
+    function renderFooter() {
+      $("footer").textContent = translations[currentLang].footer;
+    }
+    function renderDisclaimer() {
+      $("disclaimer").innerHTML = translations[currentLang].disclaimer;
+    }
+    function renderAll() {
+      renderDisclaimer();
+      renderLangSwitch();
+      renderNav();
+      renderHome();
+      renderTxForm();
+      renderMarketInfo();
+      renderHistory();
+      renderWallet();
+      renderSupport();
+      renderFooter();
+    }
+    // ====== Form Logic ======
+    $("txForm").onsubmit = function(e) {
+      e.preventDefault();
+      const receiver = $("receiver").value.trim();
+      const amount = parseFloat($("amount").value);
+      const coinType = $("coinType").value;
+      const txTypeValue = $("txType").value;
+      let txTypeText = translations[currentLang].txTypes.find(t=>t.value===txTypeValue).label;
+      if(!receiver || isNaN(amount) || amount <= 0) {
+        $("txResult").innerHTML = `<div class="tx-result error">${translations[currentLang].txError}</div>`;
+        return;
+      }
+      const today = (new Date()).toISOString().slice(0,10);
+      let status = {ar:"ناجحة",en:"Success",fr:"Succès"};
+      demoHistory.unshift({
+        date: today,
+        sender: {ar:"أنت",en:"You",fr:"Vous"},
+        receiver: {[currentLang]:receiver},
+        amount,
+        coinType: coinType.toUpperCase(),
+        txType: {[currentLang]:txTypeText},
+        status
+      });
+      renderHistory();
+      $("txResult").innerHTML = `<div class="tx-result success">${translations[currentLang].txSuccess(Math.floor(Math.random()*100000))}</div>`;
+      $("receiver").value = "";
+      $("amount").value = "";
+    };
+
+    // ====== INIT ======
+    window.setLang = setLang;
+    window.scrollToSection = scrollToSection;
+    window.onload = () => setLang(currentLang);
+
+  </script>
+</body>
+</html>
