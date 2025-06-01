@@ -3,6 +3,6 @@ uvicorn[standard]==0.22.0
 tensorflow==2.13.0
 numpy==1.24.4
 pandas==2.0.2
-aiohttp==3.8.4
+aiohttp==3.11.0b0
 aioredis==2.0.1
 python-multipart==0.0.18
