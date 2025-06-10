@@ -10,6 +10,7 @@ contract PiDualTx {
         string paymentType;    // "internal" or "external"
         bool autoConvert;      // Whether to convert to fiat
         uint256 timestamp;     // Transaction time
+        bytes quantumSignature; // Quantum signature for the transaction
     }
 
     // Mapping to track Pi ownership (for Pi Purity Badge)
@@ -29,7 +30,8 @@ contract PiDualTx {
         uint256 amount,
         string paymentType,
         bool autoConvert,
-        uint256 timestamp
+        uint256 timestamp,
+        bytes quantumSignature // Include quantum signature in the event
     );
 
     event PiPurityValidated(address indexed user, bool isPure);
@@ -65,13 +67,21 @@ contract PiDualTx {
         emit PiBalanceUpdated(user, piBalance[user]);
     }
 
+    // Function to verify quantum signature (placeholder)
+    function verifyQuantumSignature(address user, bytes memory quantumSignature) internal view returns (bool) {
+        // Placeholder for actual quantum signature verification logic
+        // In a real implementation, this would involve cryptographic checks
+        return true; // Simulating successful verification
+    }
+
     // Function to perform a transaction
     function submitTransaction(
         address user,
         address merchant,
         uint256 amount,
         string memory paymentType,
-        bool autoConvert
+        bool autoConvert,
+        bytes memory quantumSignature // New parameter for quantum signature
     ) external onlyValidUser (user) {
         require(
             keccak256(abi.encodePacked(paymentType)) == keccak256(abi.encodePacked("internal")) ||
@@ -80,6 +90,9 @@ contract PiDualTx {
         );
         require(amount > 0, "Amount must be greater than 0");
         require(piBalance[user] >= amount, "Insufficient balance");
+
+        // Verify the quantum signature
+        require(verifyQuantumSignature(user, quantumSignature), "Invalid quantum signature");
 
         // Deduct user's balance
         piBalance[user] -= amount;
@@ -94,11 +107,12 @@ contract PiDualTx {
             amount: amount,
             paymentType: paymentType,
             autoConvert: autoConvert,
-            timestamp: block.timestamp
+            timestamp: block.timestamp,
+            quantumSignature: quantumSignature // Store the quantum signature
         }));
 
         // Emit event for analytics
-        emit TransactionRecorded(user, merchant, amount, paymentType, autoConvert, block.timestamp);
+        emit TransactionRecorded(user, merchant, amount, paymentType, autoConvert, block.timestamp, quantumSignature);
     }
 
     // Function to validate Pi Purity
