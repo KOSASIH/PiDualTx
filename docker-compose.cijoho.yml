@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  cijoho-genesis-node-0:
+    image: pi-network/pi-node:v28.0.1
+    container_name: cijoho-genesis-node-0
+    environment:
+      - SOROBAN_RPC_URL=https://api.testnet.minepi.com
+      - CAPITAL_CITY=Cijoho, Kuningan, West Java (-6.979, 108.484)
+      - PHILOSOPHY=Sunda Wiwitan - Silih Asah, Asih, Asuh
+      - GCV_VALUATION=314159
+      - CHAIN_ID=314159
+      - GENESIS_COORDINATE=-6.979,108.484
+    ports:
+      - "3141:3141"
+      - "8000:8000"
+    restart: always
