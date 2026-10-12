@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pidualtx-cijoho-genesis-app
+  namespace: pidualtx-sovereign
+  labels:
+    capital: cijoho-kuningan
+    region: cijoho-kuningan
+spec:
+  replicas: 1000
+  selector:
+    matchLabels:
+      app: pidualtx-cijoho-genesis
+  template:
+    metadata:
+      labels:
+        app: pidualtx-cijoho-genesis
+        capital: cijoho-kuningan
+        region: cijoho-kuningan
+    spec:
+      containers:
+      - name: pidualtx-cijoho
+        image: ghcr.io/kosasih/pidualtx-cijoho:v15.1
+        env:
+        - name: GENESIS_COORDINATE
+          value: "-6.979,108.484"
+        - name: GENESIS_LOCATION
+          value: "Cijoho, Kuningan, West Java"
+        - name: CHAIN_ID
+          value: "314159"
+        - name: SOROBAN_RPC
+          value: "https://api.mainnet.minepi.com"
+        ports:
+        - containerPort: 8080
+          name: http
