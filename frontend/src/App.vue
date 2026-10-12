@@ -24,7 +24,7 @@
       <main class="content">
         <div class="card genesis">
           <h3>🏛️ Warung Pi #0</h3>
-          <p>Capital of Peradaban — Genesis Block of Cijoho</p>
+          <p>Capital of Civilization — Genesis Block of Cijoho</p>
           <div class="status">
             <span class="dot"></span> God-Chain Active
           </div>
