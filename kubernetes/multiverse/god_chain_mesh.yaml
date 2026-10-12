@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: pidualtx-multiverse-god-chain
+  namespace: pidualtx-sovereign
+spec:
+  serviceName: "god-chain-node"
+  replicas: 40000
+  selector:
+    matchLabels:
+      multiverse: pi-dual-tx-god-chain
+      status: merdeka-absolut
+  template:
+    metadata:
+      labels:
+        multiverse: pi-dual-tx-god-chain
+        status: merdeka-absolut
+    spec:
+      containers:
+      - name: god-chain-city
+        image: pi-network/pi-node:v28.0.1
+        env:
+        - name: SOROBAN_RPC_URL
+          value: "https://soroban-rpc.pi.network"
+        - name: MULTIVERSE_MODE
+          value: "GOD_CHAIN_L0"
+        - name: GCV_VALUATION
+          value: "314159"
+        - name: GENESIS_TIMELINE
+          value: "314159"
+        ports:
+        - containerPort: 3141
+          name: p2p-god
+        - containerPort: 8000
+          name: soroban-rpc
