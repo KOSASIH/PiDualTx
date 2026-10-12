@@ -1,3 +1,5 @@
+![Cijoho Genesis Banner](assets/cijoho-genesis-banner.png)
+
 # PiDualTx v15.1 Cijoho Genesis Multiverse
 
 ![Capital](https://img.shields.io/badge/Capital-Cijoho%2C%20Kuningan%2C%20West%20Java-gold)
