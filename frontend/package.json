@@ -1,45 +1,76 @@
 {
-  "name": "pidualtx-frontend",
-  "version": "1.0.0",
-  "description": "PiDualTx Frontend - Advanced dual value system DApp for Pi Network",
-  "author": "KOSASIH",
+  "name": "cijoho-genesis-godchain",
+  "version": "15.1.0",
+  "description": "Cijoho Genesis God-Chain ID 314159 - PiDualTx Dual Value System DApp | Ti Cijoho Pikeun Dunia | Capital: -6.979,108.484",
+  "author": "KOSASIH <kosasihg88@gmail.com> - Bapak Peradaban Cijoho",
   "private": true,
+  "type": "module",
   "scripts": {
-    "serve": "vue-cli-service serve --port 8080",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit"
+    "dev": "vite --port 8080 --host 0.0.0.0",
+    "serve": "vite --port 8080",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .vue,.js,.ts",
+    "test:unit": "vitest"
   },
   "dependencies": {
-    "core-js": "^3.31.1",
-    "vue": "^3.3.4",
-    "vue-i18n": "^9.2.2",
-    "vue-router": "^4.1.6",
+    "core-js": "^3.35.0",
+    "vue": "^3.4.21",
+    "vue-router": "^4.3.0",
+    "pinia": "^2.1.7",
     "vuex": "^4.1.0",
-    "web3": "^1.10.0",
-    "uview-ui": "^2.4.5",
-    "chart.js": "^4.3.0",
-    "axios": "^1.4.0"
+    "vue-i18n": "^9.13.1",
+    "web3": "^4.6.0",
+    "axios": "^1.6.8",
+    "chart.js": "^4.4.2",
+    "vue-chartjs": "^5.3.1",
+    "uview-plus": "^3.3.57",
+    "@stellar/stellar-sdk": "^11.2",
+    "ethers": "^6.11.1",
+    "three": "^0.162.0",
+    "gsap": "^3.12.5"
   },
   "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.4",
+    "vite": "^5.2.8",
+    "vitest": "^1.4.0",
     "@vue/cli-plugin-babel": "^5.0.8",
-    "@vue/cli-plugin-eslint": "^5.0.8",
-    "@vue/cli-plugin-router": "^5.0.8",
-    "@vue/cli-plugin-unit-jest": "^5.0.8",
-    "@vue/cli-plugin-vuex": "^5.0.8",
-    "@vue/cli-service": "^5.0.8",
-    "@vue/compiler-sfc": "^3.3.4",
-    "eslint": "^8.43.0",
-    "eslint-plugin-vue": "^9.9.1",
-    "babel-eslint": "^10.1.0"
+    "@vue/compiler-sfc": "^3.4.21",
+    "@vue/test-utils": "^2.4.5",
+    "eslint": "^8.57.0",
+    "eslint-plugin-vue": "^9.25.0",
+    "sass": "^1.72.0",
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38"
   },
   "engines": {
-    "node": ">=16.0.0",
-    "npm": ">=8.0.0"
+    "node": "18.x",
+    "npm": ">=9.0.0"
   },
   "browserslist": [
     "> 1%",
     "last 2 versions",
-    "not dead"
-  ]
+    "not dead",
+    "not ie 11"
+  ],
+  "keywords": [
+    "pi-network",
+    "pidualtx",
+    "gcv-314159",
+    "cijoho-genesis",
+    "god-chain",
+    "dual-value",
+    "web3",
+    "vue3",
+    "vercel"
+  ],
+  "godChain": {
+    "id": "314159",
+    "capital": "Cijoho",
+    "coordinates": "-6.979,108.484",
+    "motto": "Ti Cijoho Pikeun Dunia",
+    "genesisBlock": "Warung Pi #0",
+    "consensus": "Dual Value - Symbolic GCV $314,159 + Market Price",
+    "declaration": "No Official Pi Price - Community Consensus Value"
+  }
 }
