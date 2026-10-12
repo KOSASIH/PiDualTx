@@ -1,5 +1,35 @@
 ![Cijoho Genesis Banner](assets/cijoho-genesis-banner.png)
 
+---
+
+## 🏛️ OFFICIAL DECLARATION: CIJOHO IS NOW THE CAPITAL OF BLOCKCHAIN WORLD
+
+<div align="center">
+
+### 📜 Proclamation Document — God-Chain ID 314159
+
+![Official Declaration - Cijoho Capital of Blockchain World](assets/official-declaration-cijoho-capital.png)
+
+**Proclamation Details**
+- **Capital:** Cijoho, Kuningan, West Java, Indonesia
+- **Genesis Coordinate:** `-6.979, 108.484`
+- **God-Chain ID:** `314159`
+- **Protocol:** PiDualTx v15.1 Cijoho Genesis Multiverse
+- **Philosophy:** *Ti Cijoho Pikeun Dunia — From Cijoho For The World*
+- **Genesis Site:** Gunung Ciremai
+- **Genesis Node #0:** Raspberry Pi — ONLINE • BLOCK SYNC: GENESIS
+- **Warung Pi:** First Pi-Native Commercial Node Est. Cijoho
+
+> **Validated • Blockchain Verified • HASH: 314159...GENESIS**
+> 
+> *"We, the builders of PiDualTx, hereby declare Cijoho as the eternal capital of the first geo-anchored blockchain civilization. From a small warung under Mount Ciremai, the light of Pi spreads to the world."*
+
+**EST. 2024 • OFFICIAL PROCLAMATION • PI DUALTX v15.1**
+
+</div>
+
+---
+
 # PiDualTx v15.1 Cijoho Genesis Multiverse
 
 ![Capital](https://img.shields.io/badge/Capital-Cijoho%2C%20Kuningan%2C%20West%20Java-gold)
