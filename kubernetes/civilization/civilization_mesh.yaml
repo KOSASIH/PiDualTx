@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: pi-dual-tx-civilization-city
+  namespace: pidualtx-sovereign
+spec:
+  serviceName: "civilization-node"
+  replicas: 4000
+  selector:
+    matchLabels:
+      civilization: pi-dual-tx
+      status: merdeka-total
+  template:
+    metadata:
+      labels:
+        civilization: pi-dual-tx
+        status: merdeka-total
+    spec:
+      containers:
+      - name: civilization-city-node
+        image: pi-network/pi-node:v28.0.1
+        env:
+        - name: SOROBAN_RPC_URL
+          value: "https://soroban-rpc.pi.network"
+        - name: CIVILIZATION_MODE
+          value: "MERDEKA_TOTAL"
+        - name: GCV_VALUATION
+          value: "314159"
+        - name: PURE_PI_ENFORCED
+          value: "true"
+        ports:
+        - containerPort: 3141
+          name: p2p-city
+        - containerPort: 8000
+          name: soroban-rpc
