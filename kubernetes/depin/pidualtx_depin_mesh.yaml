@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: pidualtx-depin-mesh
+  namespace: pidualtx-sovereign
+spec:
+  serviceName: "pidualtx-node"
+  replicas: 4000
+  selector:
+    matchLabels:
+      app: pidualtx-depin-node
+  template:
+    metadata:
+      labels:
+        app: pidualtx-depin-node
+    spec:
+      containers:
+      - name: pi-node
+        image: pi-network/pi-node:v28.0.1
+        env:
+        - name: SOROBAN_RPC_URL
+          value: "https://soroban-rpc.pi.network"
+        - name: HYPER_SOVEREIGN_ACTIVE
+          value: "true"
+        - name: GCV_VALUATION
+          value: "314159"
+        ports:
+        - containerPort: 31415
+          name: p2p-mesh
+        - containerPort: 8000
+          name: soroban-rpc
