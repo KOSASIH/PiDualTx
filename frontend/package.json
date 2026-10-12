@@ -24,7 +24,6 @@
     "axios": "^1.6.8",
     "chart.js": "^4.4.2",
     "vue-chartjs": "^5.3.1",
-    "uview-plus": "^3.3.57",
     "@stellar/stellar-sdk": "^11.2.0",
     "ethers": "^6.11.1",
     "three": "^0.162.0",
