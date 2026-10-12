@@ -1,5 +1,4 @@
 import { createStore } from 'vuex';
-import Web3 from 'web3';
 
 export default createStore({
   state: {
@@ -75,6 +74,7 @@ export default createStore({
       }
       try {
         if (window.ethereum) {
+          const { default: Web3 } = await import('web3');
           const web3 = new Web3(window.ethereum);
           // Assuming the Pi token is ERC20 and contract address & ABI accessible
           const contractAddress = process.env.VUE_APP_CONTRACT_ADDRESS;

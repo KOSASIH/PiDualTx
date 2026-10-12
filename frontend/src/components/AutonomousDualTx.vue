@@ -24,7 +24,6 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import Web3 from 'web3';
 import PiDualTxABI from '@/abis/PiDualTx.json';
 
 export default {
@@ -60,6 +59,7 @@ export default {
     
     async executeTransaction() {
       try {
+        const { default: Web3 } = await import('web3');
         const web3 = new Web3(window.ethereum);
         const contract = new web3.eth.Contract(PiDualTxABI, process.env.VUE_APP_CONTRACT_ADDRESS);
         const accounts = await web3.eth.getAccounts();

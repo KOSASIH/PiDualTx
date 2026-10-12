@@ -1,0 +1,8 @@
+{
+  "name": "PiDualTx",
+  "description": "PiDualTx Autonomous Dual Value System DApp and Cijoho Genesis God-Chain ID 314159 portal with symbolic GCV and live market consensus.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

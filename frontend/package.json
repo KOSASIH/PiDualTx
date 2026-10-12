@@ -6,8 +6,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite --port 8080 --host 0.0.0.0",
-    "serve": "vite --port 8080",
+    "dev": "vite --port 3000 --host 0.0.0.0",
+    "serve": "vite --port 3000 --host 0.0.0.0",
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.ts",
