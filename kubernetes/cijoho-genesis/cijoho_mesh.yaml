@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: pi-dual-tx-cijoho-genesis-mesh
+  namespace: pidualtx-sovereign
+spec:
+  serviceName: "cijoho-genesis-node"
+  replicas: 40000
+  selector:
+    matchLabels:
+      capital: cijoho
+      region: cijoho-kuningan-west-java
+      status: cijoho-merdeka-total
+  template:
+    metadata:
+      labels:
+        capital: cijoho
+        region: cijoho-kuningan-west-java
+        status: cijoho-merdeka-total
+    spec:
+      containers:
+      - name: cijoho-kampung-node
+        image: pi-network/pi-node:v28.0.1
+        env:
+        - name: SOROBAN_RPC_URL
+          value: "https://soroban-rpc.pi.network"
+        - name: CAPITAL_CITY
+          value: "Cijoho, Kuningan, West Java (-6.979, 108.484)"
+        - name: PHILOSOPHY
+          value: "Sunda Wiwitan - Silih Asah, Asih, Asuh"
+        - name: GCV_VALUATION
+          value: "314159"
+        ports:
+        - containerPort: 3141
+          name: p2p-cijoho
+        - containerPort: 8000
+          name: soroban-rpc
