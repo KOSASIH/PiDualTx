@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "env": {
+    "VITE_GENESIS_LOCATION": "Cijoho, Kuningan, West Java",
+    "VITE_MAP_CENTER": "-6.979,108.484",
+    "VITE_CHAIN_ID": "314159",
+    "VITE_CAPITAL": "Cijoho"
+  },
+  "build": {
+    "env": {
+      "VITE_GENESIS_LOCATION": "Cijoho, Kuningan, West Java",
+      "VITE_MAP_CENTER": "-6.979,108.484",
+      "VITE_CHAIN_ID": "314159"
+    }
+  }
+}
