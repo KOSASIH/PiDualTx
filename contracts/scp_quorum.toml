@@ -1,0 +1,12 @@
+# SCP Quorum Configuration for Pi Network Protocol 28
+[quorum]
+threshold = 67 # Percentage required for consensus
+validators = [
+    "G1_PI_PRIMARY_VALIDATOR_NODE_28",
+    "G2_PI_SECONDARY_VALIDATOR_NODE_28",
+    "G3_PI_SCP_QUORUM_SLICE_NODE_28"
+]
+network_passphrase = "Pi Network Mainnet; Protocol 28"
+soroban_rpc_url = "https://soroban-rpc.pi.network"
+purity_enforced = true
+gcv_valuation_usd = 314159
