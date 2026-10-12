@@ -1,0 +1,16 @@
+version: '2.0'
+
+services:
+  pidualtx-cijoho:
+    image: ghcr.io/kosasih/pidualtx-cijoho:v15.1
+    environment:
+      - GENESIS_COORDINATE=-6.979,108.484
+      - GENESIS_LOCATION=Cijoho, Kuningan, West Java
+      - CHAIN_ID=314159
+      - SOROBAN_RPC=https://api.mainnet.minepi.com
+
+deployment:
+  pidualtx-cijoho:
+    akash:
+      profile: pidualtx-cijoho
+      count: 1000
