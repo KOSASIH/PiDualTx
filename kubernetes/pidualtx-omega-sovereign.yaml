@@ -1,0 +1,30 @@
+apiVersion: v1
+    kind: Namespace
+    metadata:
+      name: pidualtx-sovereign
+      labels:
+        environment: omega-sovereign
+        mesh: mycelium-4000
+    ---
+    apiVersion: apps/v1
+    kind: DaemonSet
+    metadata:
+      name: pidualtx-sovereign-shield-daemon
+      namespace: pidualtx-sovereign
+    spec:
+      selector:
+        matchLabels:
+          app: pidualtx-shield
+      template:
+        metadata:
+          labels:
+            app: pidualtx-shield
+        spec:
+          hostNetwork: true
+          containers:
+          - name: shield-enforcer
+            image: pidualtx/omega-shield:v4.0.0
+            env:
+            - name: GCV_CANONICAL
+              value: "314159.0000000"
+    
