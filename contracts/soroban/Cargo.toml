@@ -1,0 +1,26 @@
+[package]
+name = "pidualtx-soroban"
+version = "2.0.0"
+edition = "2021"
+authors = ["KOSASIH"]
+description = "PiDualTx dual-value settlement contract for Pi Network (Soroban / SCP)"
+license = "MIT"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+soroban-sdk = "25.3.2"
+
+[dev-dependencies]
+soroban-sdk = { version = "25.3.2", features = ["testutils"] }
+
+[profile.release]
+opt-level = "z"
+overflow-checks = true
+debug = 0
+strip = "symbols"
+debug-assertions = false
+panic = "abort"
+codegen-units = 1
+lto = true
