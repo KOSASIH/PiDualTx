@@ -1,58 +1,29 @@
-# Node.js
-node_modules/
-npm-debug.log
-package-lock.json
+# Rust
+target/
+**/*.rs.bk
+Cargo.lock
 
 # Python
 __pycache__/
 *.py[cod]
-*.pyo
-*.pyd
-env/
+.venv/
 venv/
+.pytest_cache/
 *.egg-info/
 
-# Java
-*.class
-*.jar
-*.war
-*.ear
-target/
-*.log
+# Secrets — never commit these
+.env
+.env.*
+*.pem
+*.key
+stellar-core.cfg
+*.secret
 
-# Docker
-*.dockerignore
-Dockerfile
-docker-compose.yml
-
-# Kubernetes
-*.yaml
-*.yml
-
-# IDE and Editor files
+# Editors / OS
 .vscode/
 .idea/
-*.swp
-*.swo
-
-# Logs
-logs/
-*.log
-
-# Build directories
-dist/
-build/
-
-# Environment variables
-.env
-.env.local
-.env.*.local
-
-# Temporary files
-tmp/
-temp/
-*.tmp
-
-# OS generated files
 .DS_Store
-Thumbs.db
+
+# NOTE: unlike the original repo, this file does NOT ignore
+# *.yaml / *.yml / Dockerfile. Blanket-ignoring those silently swallowed
+# every Kubernetes manifest and CI config in the original project.
